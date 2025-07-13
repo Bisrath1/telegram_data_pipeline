@@ -21,3 +21,4 @@ vendor/*.whl
 *.zip
 vendor/*.whl
 vendor/*.whl
+vendor/*.whl
