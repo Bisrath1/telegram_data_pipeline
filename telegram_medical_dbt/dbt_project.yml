@@ -1,0 +1,24 @@
+name: 'telegram_medical_dbt'
+version: '1.0.0'
+
+profile: 'telegram_medical_dbt'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  telegram_medical_dbt:
+    staging:
+      +materialized: view
+    marts:
+      facts:
+        +materialized: table
+
