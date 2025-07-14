@@ -1,0 +1,23 @@
+# Telegram scraping
+telethon
+python-dotenv
+
+# Data transformation
+psycopg2-binary
+dbt-postgres
+
+# Object detection
+ultralytics
+
+# API
+fastapi
+uvicorn
+
+# Pipeline orchestration
+dagster
+dagit
+dagster-postgres
+
+# Utilities
+aiofiles
+tqdm

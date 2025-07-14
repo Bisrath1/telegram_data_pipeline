@@ -1,9 +1,7 @@
 name: 'telegram_medical_dbt'
 version: '1.0.0'
 
-
 profile: 'telegram_medical_dbt'
-
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -12,17 +10,15 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-
 clean-targets:
   - "target"
   - "dbt_packages"
 
-
 models:
   telegram_medical_dbt:
     staging:
-      materialized: view
+      +materialized: view
     marts:
-      dimensions:
-        materialized: table
+      facts:
+        +materialized: table
 
