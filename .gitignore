@@ -19,3 +19,4 @@ vendor/*.whl
 vendor/*.whl
 *.pt
 *.zip
+vendor/*.whl
