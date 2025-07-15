@@ -15,3 +15,7 @@ venv/
 # Data & Logs
 data/*
 logs/*
+vendor/*.whl
+vendor/*.whl
+*.pt
+*.zip
