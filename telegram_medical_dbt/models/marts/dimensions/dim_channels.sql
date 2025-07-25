@@ -1,13 +1,6 @@
-with source as (
-    select distinct channel_name
-    from {{ ref('stg_telegram_messages') }}
-),
+{{ config(materialized='view') }}
 
-final as (
-    select
-        row_number() over (order by channel_name) as channel_id,
-        channel_name
-    from source
-)
-
-select * from final
+SELECT DISTINCT
+    channel_id,
+    'Unknown Channel' AS channel_name -- you can later enrich this
+FROM {{ ref('stg_telegram_messages') }}

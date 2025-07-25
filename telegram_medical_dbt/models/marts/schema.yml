@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: mart_user_activity
+    description: "Aggregates message count and activity per user."
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+
+      - name: message_count
+        description: "Total number of messages sent by the user"
+
+  - name: mart_message_trends
+    description: "Tracks daily message trends"
+    columns:
+      - name: message_date
+        tests:
+          - not_null
+
+      - name: total_messages
+        description: "Count of messages sent on each day"

@@ -20,4 +20,17 @@ final as (
     from date_range
 )
 
+
+
 select * from final
+
+
+{{ config(materialized='view') }}
+
+SELECT DISTINCT
+    CAST(sent_at AS DATE) AS date,
+    EXTRACT(YEAR FROM sent_at) AS year,
+    EXTRACT(MONTH FROM sent_at) AS month,
+    EXTRACT(DAY FROM sent_at) AS day,
+    EXTRACT(DOW FROM sent_at) AS weekday
+FROM {{ ref('stg_telegram_messages') }}
