@@ -20,6 +20,7 @@ final as (
     from date_range
 )
 
+<<<<<<< HEAD
 
 
 select * from final
@@ -34,3 +35,6 @@ SELECT DISTINCT
     EXTRACT(DAY FROM sent_at) AS day,
     EXTRACT(DOW FROM sent_at) AS weekday
 FROM {{ ref('stg_telegram_messages') }}
+=======
+select * from final
+>>>>>>> 7fe380ed3ca4754af7f51164ab7491d24702def4

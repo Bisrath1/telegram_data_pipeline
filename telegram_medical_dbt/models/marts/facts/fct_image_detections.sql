@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 with detections as (
     select
         detection_id,
@@ -26,3 +27,13 @@ select
     d.detection_time
 from detections d
 left join messages m on d.message_id = m.message_id
+=======
+{{ config(materialized='table') }}
+
+SELECT
+    id AS detection_id,
+    message_id,
+    detected_class,
+    confidence
+FROM {{ source('raw', 'image_detections') }}
+>>>>>>> 7fe380ed3ca4754af7f51164ab7491d24702def4

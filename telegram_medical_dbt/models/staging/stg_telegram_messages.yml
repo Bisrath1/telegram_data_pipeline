@@ -1,6 +1,7 @@
 version: 2
 
 models:
+<<<<<<< HEAD
   - name: fct_messages
     description: "Fact table of Telegram messages"
     columns:
@@ -11,3 +12,13 @@ models:
       - name: sent_at
         tests:
           - not_null
+=======
+  - name: stg_telegram_messages
+    description: "Staging model for telegram messages"
+    columns:
+      - name: message_id
+        description: "Unique ID of the message"
+        tests:
+          - not_null
+          - unique
+>>>>>>> 7fe380ed3ca4754af7f51164ab7491d24702def4
