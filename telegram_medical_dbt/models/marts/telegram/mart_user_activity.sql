@@ -1,21 +1,17 @@
--- models/marts/telegram/mart_user_activity.sql
+{{ config(materialized='table') }}
 
-WITH user_messages AS (
-  SELECT
-    user_id,
-    COUNT(*) AS message_count,
-    MIN(timestamp) AS first_message_time,
-    MAX(timestamp) AS last_message_time
-  FROM {{ ref('stg_messages') }}
-  GROUP BY user_id
+with messages as (
+    select * from {{ ref('stg_messages') }}
+),
+
+user_activity as (
+    select
+        user_id,
+        count(*) as total_messages,
+        min(created_at) as first_message_time,
+        max(created_at) as last_message_time
+    from messages
+    group by user_id
 )
 
-SELECT
-  u.user_id,
-  u.username,
-  u.joined_at,
-  um.message_count,
-  um.first_message_time,
-  um.last_message_time
-FROM {{ ref('stg_users') }} u
-LEFT JOIN user_messages um ON u.user_id = um.user_id
+select * from user_activity

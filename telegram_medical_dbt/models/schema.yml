@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_messages
+    description: "Staged telegram messages"
+    columns:
+      - name: message_id
+        description: "Primary key"
+
+  - name: stg_users
+    description: "Staged telegram users"
+    columns:
+      - name: user_id
+        description: "Primary key"
+
+  - name: mart_user_activity
+    description: "Aggregated user activity"
+    columns:
+      - name: user_id
+        description: "User identifier"
+
+  - name: mart_message_trends
+    description: "Daily message trends"
+    columns:
+      - name: message_date
+        description: "Date of messages"

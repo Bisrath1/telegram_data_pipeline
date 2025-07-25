@@ -1,8 +1,15 @@
--- models/marts/telegram/mart_message_trends.sql
+{{ config(materialized='table') }}
 
-SELECT
-  DATE_TRUNC('day', timestamp) AS message_date,
-  COUNT(*) AS total_messages
-FROM {{ ref('stg_messages') }}
-GROUP BY 1
-ORDER BY 1
+with messages as (
+    select * from {{ ref('stg_messages') }}
+),
+
+daily_counts as (
+    select
+        date_trunc('day', created_at) as message_date,
+        count(*) as total_messages
+    from messages
+    group by message_date
+)
+
+select * from daily_counts order by message_date

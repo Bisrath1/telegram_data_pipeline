@@ -2,6 +2,7 @@
 telethon
 python-dotenv
 
+
 # Data transformation
 psycopg2-binary
 dbt-postgres

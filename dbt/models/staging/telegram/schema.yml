@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: stg_messages
+    description: "Staging model for messages extracted from the raw Telegram data."
+    columns:
+      - name: message_id
+        description: "Unique ID of the message"
+        tests:
+          - not_null
+          - unique
+
+      - name: user_id
+        description: "ID of the user who sent the message"
+
+      - name: message_text
+        description: "Content of the message"
+
+      - name: timestamp
+        description: "Time when the message was sent"
+
+  - name: stg_users
+    description: "Staging model for users extracted from Telegram."
+    columns:
+      - name: user_id
+        description: "Unique ID of the user"
+        tests:
+          - not_null
+          - unique
+
+      - name: username
+        description: "Telegram username of the user"
+
+      - name: joined_at
+        description: "Timestamp when the user joined"
