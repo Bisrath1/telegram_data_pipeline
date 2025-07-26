@@ -27,3 +27,4 @@ vendor/*.whl
 =======
 vendor/
 >>>>>>> 7fe380ed3ca4754af7f51164ab7491d24702def4
+vendor/*.whl
