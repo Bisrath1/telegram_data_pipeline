@@ -1,20 +1,47 @@
 # telegram_client.py
-from telethon.sync import TelegramClient
-from dotenv import load_dotenv
 import os
+import logging
+from telethon import TelegramClient
+from dotenv import load_dotenv
 
+# Load environment variables
 load_dotenv()
 
-api_id = int(os.getenv("API_ID"))
-api_hash = os.getenv("API_HASH")
-session_name = os.getenv("SESSION_NAME", "session")
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
-client = TelegramClient(session_name, api_id, api_hash)
+# Load and validate required environment variables
+try:
+    API_ID = int(os.getenv("API_ID", "").strip())
+    API_HASH = os.getenv("API_HASH", "").strip()
+    SESSION_NAME = os.getenv("SESSION_NAME", "session").strip()
 
-async def test_connection():
-    await client.start()
-    me = await client.get_me()
-    print(f"Logged in as: {me.username}")
+    if not API_ID or not API_HASH:
+        raise ValueError("Missing required environment variables: API_ID or API_HASH")
+
+except Exception as e:
+    logging.error(f"Environment variable error: {e}")
+    raise
+
+# Initialize Telegram client
+client: TelegramClient = TelegramClient(SESSION_NAME, API_ID, API_HASH)
+
+async def test_connection() -> None:
+    """
+    Test Telegram client connection and print user info.
+    """
+    try:
+        await client.start()
+        me = await client.get_me()
+        logging.info(f"✅ Logged in successfully as: {me.username or me.id}")
+    except Exception as e:
+        logging.error(f"❌ Failed to connect: {e}")
+    finally:
+        await client.disconnect()
+
 
 if __name__ == "__main__":
     import asyncio
